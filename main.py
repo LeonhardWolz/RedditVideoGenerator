@@ -1,16 +1,26 @@
-# This is a sample Python script.
+import configparser
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+from reddit_connector import RedditConnector
+from video_creator import VideoCreator
 
 
-# Press the green button in the gutter to run the script.
+
+def main():
+    config = configparser.ConfigParser()
+    config.read_file(open("settings.cfg"))
+
+    thread = config.get("reddit-thread", "thread")
+    COMMENT_COUNT = int(config.get("settings", "COMMENT_COUNT"))
+
+
+
+    # tts = gTTS(test, lang="en")
+    # tts.save("temp/testaudio.mp3")
+
+    #VideoCreator().create(RedditConnector(thread, COMMENT_COUNT).get_thread_queue())
+    VideoCreator().create(None)
+    # delete temp folder contents
+
+
 if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    main()
